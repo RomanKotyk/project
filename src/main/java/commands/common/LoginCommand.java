@@ -25,10 +25,11 @@ public class LoginCommand implements Command {
 
         String result_page = (user == null) ? "login.jsp" : "controller?action=main";
         if (user == null){
-            request.getSession().setAttribute("user", null);
+            request.getSession().setAttribute("notExists", "notExists");
         }
         else {
             request.getSession().setAttribute("user", user);
+            request.getSession().removeAttribute("notExists");
         }
         log.debug("Commands finished");
         return result_page;

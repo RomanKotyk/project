@@ -30,10 +30,7 @@ public class UserDAO extends AbstractDAO{
     }
 
     public boolean addUser(User user){
-        User exists = getInstance().getUserByLogin(user.getLogin());
-        if(exists != null) {
-            return false;
-        }
+
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(ADD_USER)) {
             statement.setString(1, user.getLogin());

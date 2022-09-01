@@ -70,14 +70,5 @@
     <listener-class>web.listener.ContextListener</listener-class>
   </listener>
 
-  <error-page>
-    <error-code>404</error-code>
-    <location>/error.jsp</location>
-  </error-page>
-
-  <error-page>
-    <error-code>505</error-code>
-    <location>/error.jsp</location>
-  </error-page>
 
 </web-app>

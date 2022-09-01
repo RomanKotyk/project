@@ -59,11 +59,8 @@ public class PDFBuilder {
 
 
     private static void openInBrowser(HttpServletResponse response, ByteArrayOutputStream baos) {
-        // setting the content type
         response.setContentType("application/pdf");
-        // the contentlength
         response.setContentLength(baos.size());
-        // write ByteArrayOutputStream to the ServletOutputStream
         OutputStream os = null;
         try {
             os = response.getOutputStream();

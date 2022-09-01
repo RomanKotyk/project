@@ -11,6 +11,7 @@ public class UserServiceImpl implements IUserService{
     private UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
     @Override
     public boolean addUser(User user) {
+        if (this.userDAO.getUserByLogin(user.getLogin())!=null) return false;
         return this.userDAO.addUser(user);
     }
 

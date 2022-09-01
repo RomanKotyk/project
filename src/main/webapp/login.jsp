@@ -18,9 +18,7 @@
                 <div class="form-header">
                     <h3><fmt:message key="login.form.h3"/> </h3>
                     <p><fmt:message key="login.form.description"/></p>
-                    <jstl:if test="${sessionScope.user == null}">
-                        <p style="color: red"><fmt:message key="login.error.message"/></p>
-                    </jstl:if>
+                    <%if (session.getAttribute("notExists") != null && ((String) session.getAttribute("notExists")).compareToIgnoreCase("notExists") == 0){%><p style="color: red"><fmt:message key="login.error.message"/></p><%}%>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-input" name="login" placeholder='<fmt:message key="subscriber.add.form.label.login"/>'>
