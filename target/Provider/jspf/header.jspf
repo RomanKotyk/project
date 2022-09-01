@@ -1,0 +1,48 @@
+<%@ include file="directive/taglib.jspf" %>
+<%@ include file="directive/page.jspf" %>
+
+<header>
+    <jstl:choose>
+        <jstl:when test="${empty sessionScope.user}">
+            <nav class="container menu">
+                <a href="controller?action=main"><fmt:message key="header.provider"/></a>
+                <a href="controller?action=services"><fmt:message key="header.services"/></a>
+                <a href="login.jsp"><fmt:message key="header.login"/></a>
+                <div>
+                    <form method="post" action="controller?action=language">
+                        <button class="language" type="submit" name="en"><fmt:message key="header.language.en"/></button>
+                        <button class="language" type="submit" name="uk"><fmt:message key="header.language.uk"/></button>
+                    </form>
+                </div>
+            </nav>
+        </jstl:when>
+        <jstl:when test="${sessionScope.user.admin == true}">
+            <nav class="container menu">
+                <a href="controller?action=main"><fmt:message key="header.provider"/></a>
+                <a href="controller?action=services"><fmt:message key="header.services"/></a>
+                <a href="controller?action=users"><fmt:message key="header.admin.subscribers"/></a>
+                <a href="controller?action=logout"><fmt:message key="header.logout"/></a>
+                <div>
+                    <form method="post" action="controller?action=language">
+                        <button class="language" type="submit" name="en"><fmt:message key="header.language.en"/></button>
+                        <button class="language" type="submit" name="uk"><fmt:message key="header.language.uk"/></button>
+                    </form>
+                </div>
+            </nav>
+        </jstl:when>
+        <jstl:when test="${sessionScope.user.admin == false}">
+            <nav class="container menu">
+                <a href="controller?action=main"><fmt:message key="header.provider"/></a>
+                <a href="controller?action=services"><fmt:message key="header.services"/></a>
+                <a href="controller?action=profile"><fmt:message key="header.user.profile"/></a>
+                <a href="controller?action=logout"><fmt:message key="header.logout"/></a>
+                <div>
+                    <form method="post" action="controller?action=language">
+                        <button class="language" type="submit" name="en"><fmt:message key="header.language.en"/></button>
+                        <button class="language" type="submit" name="uk"><fmt:message key="header.language.uk"/></button>
+                    </form>
+                </div>
+            </nav>
+        </jstl:when>
+    </jstl:choose>
+</header>
