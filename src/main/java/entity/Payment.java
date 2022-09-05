@@ -1,12 +1,15 @@
 package entity;
 
+import java.io.Serializable;
 import java.sql.Date;
+import java.util.Objects;
+
 /**
  * Payment entity
  *
  * @author R.Kotyk
  * */
-public class Payment {
+public class Payment implements Serializable{
     private int user_id;
     private int tariff_id;
     private Date write_off;
@@ -57,5 +60,18 @@ public class Payment {
      * */
     public void setWrite_off(Date write_off) {
         this.write_off = write_off;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Payment payment = (Payment) o;
+        return user_id == payment.user_id && tariff_id == payment.tariff_id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user_id, tariff_id);
     }
 }

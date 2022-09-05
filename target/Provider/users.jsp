@@ -18,8 +18,8 @@
         <div class="command">
             <select required id="inputSort" class="form-control" name="users_sort" onchange="location = this.value;">
                 <option selected value="controller?action=users"><fmt:message key="subscriber.add.form.select.default"/></option>
-                <option value="controller?action=users&a-z=true">A-z</option>
-                <option value="controller?action=users&z-a=true">Z-a</option>
+                <option value="controller?action=users&sort=a-z">A-z</option>
+                <option value="controller?action=users&sort=z-a">Z-a</option>
             </select>
         </div>
     </div>
@@ -71,7 +71,7 @@
     </div>
     <div class="container pages">
         <jstl:if test="${currentPage != 1}">
-            <td><a href="controller?action=get_records&page=${currentPage - 1}"><fmt:message key="pages.previous"/></a></td>
+            <td><a href="controller?action=get_records&page=${currentPage - 1}&sort=${requestScope.sort}"><fmt:message key="pages.previous"/></a></td>
         </jstl:if>
 
         <table>
@@ -82,7 +82,7 @@
                             <td>${i}</td>
                         </jstl:when>
                         <jstl:otherwise>
-                            <td><a href="controller?action=get_records&page=${i}">${i}</a></td>
+                            <td><a href="controller?action=get_records&page=${i}&sort=${requestScope.sort}">${i}</a></td>
                         </jstl:otherwise>
                     </jstl:choose>
                 </jstl:forEach>
@@ -90,7 +90,7 @@
         </table>
 
         <jstl:if test="${currentPage lt noOfPages}">
-            <td><a href="controller?action=get_records&page=${currentPage + 1}"><fmt:message key="pages.next"/></a></td>
+            <td><a href="controller?action=get_records&page=${currentPage + 1}&sort=${requestScope.sort}"><fmt:message key="pages.next"/></a></td>
         </jstl:if>
     </div>
 </main>

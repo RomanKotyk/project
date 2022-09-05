@@ -1,7 +1,9 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 /**
  *  Service entity
@@ -9,7 +11,7 @@ import java.util.Set;
  *  @author R.Kotyk
  *
  * */
-public class Service {
+public class Service implements Serializable {
     private int id;
     private String name;
     private String description;
@@ -75,5 +77,18 @@ public class Service {
      * */
     public void setTariffList(ArrayList<Tariff> tariffList) {
         this.tariffList = tariffList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Service service = (Service) o;
+        return Objects.equals(name, service.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

@@ -1,7 +1,7 @@
 package commands.common;
 
 import commands.Command;
-import commands.PDFBuilder;
+import utils.PDFBuilder;
 import entity.Tariff;
 import services.ITariffService;
 import services.TariffServiceImpl;

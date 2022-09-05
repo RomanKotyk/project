@@ -20,7 +20,9 @@ public class UserDAO extends AbstractDAO{
     private String ADD_SUBSCRIBE = "INSERT INTO subcribers (user_id, tariff_id, write_off) VALUES (?,?, DATE_ADD(CURRENT_DATE, INTERVAL 1 MONTH))";
     private String GET_SUBSCRIPTION = "SELECT tariffs.id, tariffs.name, tariffs.description, tariffs.price FROM tariffs INNER JOIN subcribers ON tariffs.id = subcribers.tariff_id AND subcribers.user_id= ?";
     private String UPDATE_BALANCE = "UPDATE users SET balance = ? WHERE id = ?";
-    private String GET_RECORDS = "SELECT * FROM users LIMIT";
+    private String GET_RECORDS = "SELECT * FROM users LIMIT ";
+    private String GET_RECORDS_BY_NAME = "SELECT * FROM users ORDER BY login LIMIT ";
+    private String GET_RECORDS_BY_NAME_DESC = "SELECT * FROM users ORDER BY login DESC LIMIT ";
     private static UserDAO instance;
     public static UserDAO getInstance(){
         if (instance == null){
@@ -250,10 +252,10 @@ public class UserDAO extends AbstractDAO{
         }
     }
 
-    public ArrayList<User> getRecords(int start, int perPage){
+    public ArrayList<User> getRecords(String sorting, int start, int perPage){
         ArrayList<User> users = new ArrayList<User>();
         try (Connection connection = getConnection();
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM users LIMIT " + start + ", " + perPage);){
+        PreparedStatement statement = connection.prepareStatement(getSQL(sorting) + start + ", " + perPage)){
             ResultSet rs = statement.executeQuery();
             while (rs.next()){
                 User user = new User();
@@ -272,6 +274,13 @@ public class UserDAO extends AbstractDAO{
             throw new RuntimeException();
         }
         return users;
+    }
+
+    private String getSQL(String sorting){
+        if (sorting == null) return GET_RECORDS;
+        if (sorting.equalsIgnoreCase("a-z")) return GET_RECORDS_BY_NAME;
+        if (sorting.equalsIgnoreCase("z-a")) return GET_RECORDS_BY_NAME_DESC;
+        return null;
     }
 
 }

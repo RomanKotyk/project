@@ -1,11 +1,15 @@
 package entity;
+
+import java.io.Serializable;
+import java.util.Objects;
+
 /**
  * Tariff entity
  *
  * @author R.Kotyk
  *
  * */
-public class Tariff {
+public class Tariff implements Serializable {
     private int id;
     private String name;
     private String description;
@@ -135,5 +139,18 @@ public class Tariff {
     @Override
     public String toString() {
         return ""+id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tariff tariff = (Tariff) o;
+        return Objects.equals(name, tariff.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

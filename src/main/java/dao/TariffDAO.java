@@ -65,10 +65,6 @@ public class TariffDAO extends AbstractDAO{
      * @return is it added
      * */
     public boolean addTarrif(Tariff tariff){
-        Tariff exists = getInstance().getTariffByName(tariff.getName());
-        if(exists != null) {
-            return false;
-        }
         try (Connection connection = getConnection();
         PreparedStatement statement = connection.prepareStatement(ADD_TARIFF)){
             statement.setString(1, tariff.getName());

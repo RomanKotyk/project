@@ -9,4 +9,5 @@ import java.util.ArrayList;
 public interface IPaymentService {
     ArrayList<Payment> getAllPayment();
     void updateWriteOffDate(User user, Tariff tariff);
+    Payment getPaymentByUserTariff(User user, Tariff tariff);
 }

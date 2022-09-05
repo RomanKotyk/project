@@ -16,5 +16,5 @@ public interface IUserService {
     ArrayList<Tariff> getSubscriptions(User user);
     boolean subscribe(User user, Tariff tariff);
     void updateBalance(User user);
-    ArrayList<User> getRecords(int start, int perPage);
+    ArrayList<User> getRecords(String sorting, int start, int perPage);
 }

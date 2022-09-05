@@ -8,7 +8,15 @@ import entity.User;
 import java.util.ArrayList;
 
 public class UserServiceImpl implements IUserService{
-    private UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
+    private UserDAO userDAO;
+
+    public UserServiceImpl(){
+        userDAO = DAOFactory.getInstance().getUserDAO();
+    }
+
+    public UserServiceImpl(UserDAO userDAO){
+        this.userDAO = userDAO;
+    }
     @Override
     public boolean addUser(User user) {
         if (this.userDAO.getUserByLogin(user.getLogin())!=null) return false;
@@ -61,7 +69,7 @@ public class UserServiceImpl implements IUserService{
     }
 
     @Override
-    public ArrayList<User> getRecords(int start, int perPage) {
-        return this.userDAO.getRecords(start, perPage);
+    public ArrayList<User> getRecords(String sorting, int start, int perPage) {
+        return this.userDAO.getRecords(sorting, start, perPage);
     }
 }

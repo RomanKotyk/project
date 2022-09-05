@@ -1,9 +1,6 @@
 package commands.admin;
 
 import commands.Command;
-import dao.DAOFactory;
-import dao.ServiceDAO;
-import dao.TariffDAO;
 import entity.Service;
 import entity.Tariff;
 import org.apache.log4j.Logger;

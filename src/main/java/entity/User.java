@@ -1,5 +1,6 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,7 +12,7 @@ import java.util.Objects;
  *
  * */
 
-public class User {
+public class User implements Serializable {
     private int id;
     private String login;
     private String surname;

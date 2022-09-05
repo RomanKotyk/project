@@ -1,9 +1,6 @@
 package commands.user;
 
 import commands.Command;
-import commands.common.UpdateLanguageCommand;
-import dao.DAOFactory;
-import dao.UserDAO;
 import entity.Tariff;
 import entity.User;
 import org.apache.log4j.Logger;

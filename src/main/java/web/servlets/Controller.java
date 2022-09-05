@@ -1,6 +1,6 @@
 package web.servlets;
 
-import commands.AsyncCommand;
+import utils.AsyncCommand;
 import commands.Command;
 import org.apache.log4j.Logger;
 

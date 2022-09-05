@@ -1,13 +1,13 @@
 package commands.common;
 
 import commands.Command;
-import dao.DAOFactory;
-import dao.ServiceDAO;
-import dao.TariffDAO;
+import services.IServiceService;
+import services.ITariffService;
+import services.ServiceServiceImpl;
+import services.TariffServiceImpl;
 import entity.Service;
 import entity.Tariff;
 import org.apache.log4j.Logger;
-import services.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

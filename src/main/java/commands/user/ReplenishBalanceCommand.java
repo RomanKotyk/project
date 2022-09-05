@@ -1,11 +1,7 @@
 package commands.user;
 
 import commands.Command;
-import commands.common.UpdateLanguageCommand;
-import dao.DAOFactory;
-import dao.PaymentDAO;
-import dao.TariffDAO;
-import dao.UserDAO;
+
 import entity.Payment;
 import entity.Tariff;
 import entity.User;
@@ -14,7 +10,6 @@ import services.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.TabableView;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;

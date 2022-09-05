@@ -1,10 +1,6 @@
-package commands;
+package utils;
 
 import commands.admin.RecordsUsersCommand;
-import dao.DAOFactory;
-import dao.PaymentDAO;
-import dao.TariffDAO;
-import dao.UserDAO;
 import entity.Payment;
 import entity.Tariff;
 import entity.User;
@@ -20,7 +16,7 @@ import java.util.concurrent.Executors;
 
 
 public class AsyncCommand {
-    private static final Logger log = Logger.getLogger(RecordsUsersCommand.class);
+    private static final Logger log = Logger.getLogger(AsyncCommand.class);
     public static void startCommand() {
         log.debug("Commands starts");
         Callable<Void> thread = () -> {
@@ -44,6 +40,7 @@ public class AsyncCommand {
                                 user.setBalance(user_balance);
                                 userService.updateBalance(user);
                                 paymentService.updateWriteOffDate(user, tariff);
+                                log.debug("Payment - OK: User: " + user.getId() + " Tariff: " + tariff.getId());
                             }
                         }
                     }
@@ -55,6 +52,5 @@ public class AsyncCommand {
         ExecutorService service = Executors.newFixedThreadPool(2);
         service.submit(thread);
         service.shutdown();
-        log.debug("Commands finished");
     }
 }

@@ -1,8 +1,6 @@
 package commands.admin;
 
 import commands.Command;
-import dao.DAOFactory;
-import dao.UserDAO;
 import entity.User;
 import org.apache.log4j.Logger;
 import services.IUserService;
@@ -24,25 +22,18 @@ public class RecordsUsersCommand implements Command {
             page = Integer.parseInt(request.getParameter("page"));
 
         IUserService userService = new UserServiceImpl();
-        ArrayList<User> list = userService.getRecords((page-1)*recordsPerPage,
+        String sorting = (request.getParameter("sort") == null) ? (String) request.getAttribute("sort") : request.getParameter("sort");
+
+        ArrayList<User> list = userService.getRecords(sorting,(page-1)*recordsPerPage,
                 recordsPerPage);
         int noOfRecords = userService.getAllUsers().size();
         int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 
-        if (request.getParameter("a-z") != null){
-            Collections.sort(list, (User u1, User u2) ->{
-                return u1.getLogin().compareToIgnoreCase(u2.getName());
-            });
-        }
-        if (request.getParameter("z-a") != null){
-            Collections.sort(list, (User u1, User u2) ->{
-                return u2.getLogin().compareToIgnoreCase(u1.getName());
-            });
-        }
 
         request.setAttribute("user_list", list);
         request.setAttribute("noOfPages", noOfPages);
         request.setAttribute("currentPage", page);
+        request.setAttribute("sort", sorting);
         log.debug("Commands finished");
         return "users.jsp";
     }

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class PaymentDAO extends AbstractDAO{
     private String GET_ALL_PAYMENT = "SELECT * FROM subcribers";
     private String UPDATE_WRITE_OFF_DATE = "UPDATE subcribers SET write_off = DATE_ADD(CURRENT_DATE, INTERVAL 1 MONTH) WHERE user_id = ? and tariff_id = ?";
+    private String GET_PAYMENT_BY_USER_TARIFF = "SELECT * FROM subcribers WHERE user_id = ? AND tariff_id = ?";
     private static PaymentDAO instance;
 
     public static PaymentDAO getInstance(){
@@ -64,5 +65,25 @@ public class PaymentDAO extends AbstractDAO{
         catch (SQLException e){
             throw new RuntimeException(e);
         }
+    }
+
+    public Payment getPaymentByUserTariff(User user, Tariff tariff){
+        Payment payment = null;
+        try (Connection connection = getConnection();
+        PreparedStatement statement = connection.prepareStatement(GET_PAYMENT_BY_USER_TARIFF)){
+            statement.setInt(1, user.getId());
+            statement.setInt(2, tariff.getId());
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()){
+                payment.setUser_id(rs.getInt(1));
+                payment.setTariff_id(rs.getInt(2));
+                payment.setWrite_off(rs.getDate(3));
+            }
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        return payment;
     }
 }

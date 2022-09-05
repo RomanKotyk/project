@@ -7,7 +7,14 @@ import entity.Service;
 import java.util.ArrayList;
 
 public class ServiceServiceImpl implements IServiceService{
-    private ServiceDAO serviceDAO = DAOFactory.getInstance().getServiceDAO();
+    private ServiceDAO serviceDAO;
+    public ServiceServiceImpl(){
+        this.serviceDAO = DAOFactory.getInstance().getServiceDAO();
+    }
+
+    public ServiceServiceImpl(ServiceDAO serviceDAO){
+        this.serviceDAO = serviceDAO;
+    }
     @Override
     public ArrayList<Service> getAllServices() {
         return this.serviceDAO.getAllServices();

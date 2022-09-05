@@ -1,10 +1,6 @@
 package commands.user;
 
 import commands.Command;
-import commands.common.UpdateLanguageCommand;
-import dao.DAOFactory;
-import dao.UserDAO;
-import entity.Tariff;
 import entity.User;
 import org.apache.log4j.Logger;
 import services.IUserService;
@@ -25,6 +21,7 @@ public class ProfileCommand implements Command {
         user.setTariffList(userService.getSubscriptions(user));
 
         request.getSession().setAttribute("user", user);
+
         log.debug("Commands finished");
         return "profile.jsp";
     }

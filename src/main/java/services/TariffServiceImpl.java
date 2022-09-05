@@ -8,7 +8,15 @@ import entity.Tariff;
 import java.util.ArrayList;
 
 public class TariffServiceImpl implements ITariffService{
-    private TariffDAO tariffDAO = DAOFactory.getInstance().getTariffDAO();
+    private TariffDAO tariffDAO;
+
+    public TariffServiceImpl(){
+        tariffDAO = DAOFactory.getInstance().getTariffDAO();
+    }
+
+    public TariffServiceImpl(TariffDAO tariffDAO){
+        this.tariffDAO = tariffDAO;
+    }
     @Override
     public ArrayList<Tariff> getAllTariffs() {
         return this.tariffDAO.getAllTariffs();
@@ -16,6 +24,7 @@ public class TariffServiceImpl implements ITariffService{
 
     @Override
     public boolean addTarrif(Tariff tariff) {
+        if (this.tariffDAO.getTariffByName(tariff.getName()) != null) return false;
         return this.tariffDAO.addTarrif(tariff);
     }
 
